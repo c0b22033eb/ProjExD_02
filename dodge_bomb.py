@@ -1,5 +1,7 @@
+import random 
 import sys
 import pygame as pg
+
 
 
 WIDTH, HEIGHT = 1600, 900
@@ -13,14 +15,24 @@ def main():
     kk_img = pg.transform.rotozoom(kk_img, 0, 2.0)
     clock = pg.time.Clock()
     tmr = 0
+    enn = pg.Surface((20, 20))
+    pg.draw.circle(enn, (255, 0, 0), (10, 10), 10)
+    enn.set_colorkey((0, 0, 0))
+    x, y = random.randint(10, WIDTH-10), random.randint(10, HEIGHT-10)
+    bakudan_rct = enn.get_rect()
+    bakudan_rct.center = x, y
+
+
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: 
                 return
-
+            
         screen.blit(bg_img, [0, 0])
         screen.blit(kk_img, [900, 400])
-        pg.display.update()
+        screen.blit(enn, bakudan_rct)
+
+        pg.display.update()   
         tmr += 1
         clock.tick(10)
 
