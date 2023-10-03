@@ -44,6 +44,7 @@ def main():
     bakudan_rct = enn.get_rect()
     bakudan_rct.center = x, y
     vx, vy = +5, +5
+    
     #　方向による画像の辞書
     img_dct = {(-5, 0):pg.image.load("ex02/fig/3.png"), 
                (-5, -5):pg.transform.rotozoom(pg.image.load("ex02/fig/3.png"), -45, 1.0),
