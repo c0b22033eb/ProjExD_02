@@ -55,7 +55,7 @@ def main():
                (0, -5):pg.transform.rotozoom(pg.transform.flip(pg.image.load("ex02/fig/3.png"), True, False), +90, 1.0),
                (0, 0):pg.image.load("ex02/fig/3.png"), 
                }
-
+    accs = [a for a in range(1, 11)]
 
     while True:
         for event in pg.event.get():
@@ -89,7 +89,8 @@ def main():
             vy = -vy
         if not bakudan_rct_bool[3]:
             vy = -vy
-        bakudan_rct.move_ip((vx, vy))
+        avx, avy = vx*accs[min(tmr//500, 9)], vy*accs[min(tmr//500, 9)]
+        bakudan_rct.move_ip((avx, avy))
         screen.blit(bg_img, [0, 0])
         screen.blit(kk_img, kk_img_rct)
         screen.blit(enn, bakudan_rct)
