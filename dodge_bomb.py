@@ -45,22 +45,33 @@ def main():
     bakudan_rct = enn.get_rect()
     bakudan_rct.center = x, y
     vx, vy = +5, +5
-    v_lst = {pg.K_UP:(0, -5), pg.K_DOWN:(0, +5), pg.K_LEFT:(-5, 0), pg.K_RIGHT:(+5, 0)}
+    img_dct = {(-5, 0):pg.image.load("ex02/fig/3.png"), 
+               (-5, -5):pg.transform.rotozoom(pg.image.load("ex02/fig/3.png"), -45, 1.0),
+               (-5, +5):pg.transform.rotozoom(pg.image.load("ex02/fig/3.png"), +45, 1.0),
+               (0, +5):pg.transform.rotozoom(pg.image.load("ex02/fig/3.png"), +90, 1.0),
+               (+5, 0):pg.transform.flip(pg.image.load("ex02/fig/3.png"), True, False),
+               (+5, -5):pg.transform.rotozoom(pg.transform.flip(pg.image.load("ex02/fig/3.png"), True, False), +45, 1.0),
+               (+5, +5):pg.transform.rotozoom(pg.transform.flip(pg.image.load("ex02/fig/3.png"), True, False), -45, 1.0),
+               (0, -5):pg.transform.rotozoom(pg.transform.flip(pg.image.load("ex02/fig/3.png"), True, False), +90, 1.0),
+               (0, 0):pg.image.load("ex02/fig/3.png"), 
+               }
 
 
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: 
                 return
+            
         key_lst = pg.key.get_pressed()
         合計移動量 = [0, 0]
         if key_lst[pg.K_UP]: 合計移動量[1] -= 5
         if key_lst[pg.K_DOWN]: 合計移動量[1] += 5
-        if key_lst[pg.K_LEFT]: 合計移動量[0] -= 5
+        if key_lst[pg.K_LEFT]: 合計移動量[0] -= 5 
         if key_lst[pg.K_RIGHT]: 合計移動量[0] += 5
+        kk_img = img_dct[tuple(合計移動量)]
         kk_img_rct.move_ip(合計移動量)
         kk_img_rct_bool = hantei(kk_img_rct)
-        print(kk_img_rct)
+        kk_img = pg.transform.rotozoom(kk_img, 0, 2.0)
         if not kk_img_rct_bool[0]:
             kk_img_rct[0] = 0
         if not kk_img_rct_bool[1]:
