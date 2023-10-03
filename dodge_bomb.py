@@ -21,20 +21,23 @@ def main():
     x, y = random.randint(10, WIDTH-10), random.randint(10, HEIGHT-10)
     bakudan_rct = enn.get_rect()
     bakudan_rct.center = x, y
+    vx, vy = +5, +5
+
 
 
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: 
                 return
-            
+    
+        bakudan_rct.move_ip(vx, vy)
         screen.blit(bg_img, [0, 0])
         screen.blit(kk_img, [900, 400])
         screen.blit(enn, bakudan_rct)
 
         pg.display.update()   
         tmr += 1
-        clock.tick(10)
+        clock.tick(50)
 
 
 if __name__ == "__main__":
