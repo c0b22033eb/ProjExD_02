@@ -82,6 +82,8 @@ def main():
         screen.blit(bg_img, [0, 0])
         screen.blit(kk_img, kk_img_rct)
         screen.blit(enn, bakudan_rct)
+        if kk_img_rct.colliderect(bakudan_rct):
+            return
 
         pg.display.update()   
         tmr += 1
