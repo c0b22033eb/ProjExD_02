@@ -3,25 +3,24 @@ import sys
 import pygame as pg
 
 
-
 WIDTH, HEIGHT = 1600, 900
 
 
 def hantei(rct):
-    left, top, right, bottom = rct
-    if left < 0:
+    yoko, tate, right, bottom = rct
+    if yoko < 0:
         bleft = False
     else:
         bleft = True
-    if 1600-right < left:
+    if WIDTH-right < yoko:
         bright = False
     else:
         bright = True
-    if top < 0:
+    if tate < 0:
         btop = False
     else:
         btop = True
-    if 900-bottom < top:
+    if HEIGHT-bottom < tate:
         bbottom = False
     else:
         bbottom = True
@@ -45,6 +44,7 @@ def main():
     bakudan_rct = enn.get_rect()
     bakudan_rct.center = x, y
     vx, vy = +5, +5
+    #　方向による画像の辞書
     img_dct = {(-5, 0):pg.image.load("ex02/fig/3.png"), 
                (-5, -5):pg.transform.rotozoom(pg.image.load("ex02/fig/3.png"), -45, 1.0),
                (-5, +5):pg.transform.rotozoom(pg.image.load("ex02/fig/3.png"), +45, 1.0),
