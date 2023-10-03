@@ -19,20 +19,27 @@ def main():
     pg.draw.circle(enn, (255, 0, 0), (10, 10), 10)
     enn.set_colorkey((0, 0, 0))
     x, y = random.randint(10, WIDTH-10), random.randint(10, HEIGHT-10)
+    kk_img_rct = kk_img.get_rect()
+    kk_img_rct.center = 900, 400
     bakudan_rct = enn.get_rect()
     bakudan_rct.center = x, y
     vx, vy = +5, +5
-
+    v_lst = {pg.K_UP:(0, -5), pg.K_DOWN:(0, +5), pg.K_LEFT:(-5, 0), pg.K_RIGHT:(+5, 0)}
 
 
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: 
                 return
-    
-        bakudan_rct.move_ip(vx, vy)
+        key_lst = pg.key.get_pressed()
+        合計移動量 = [0, 0]
+        if key_lst[pg.K_UP]: 合計移動量[1] -= 5
+        if key_lst[pg.K_DOWN]: 合計移動量[1] += 5
+        if key_lst[pg.K_LEFT]: 合計移動量[0] -= 5
+        if key_lst[pg.K_RIGHT]: 合計移動量[0] += 5
+        kk_img_rct.move_ip(合計移動量)
         screen.blit(bg_img, [0, 0])
-        screen.blit(kk_img, [900, 400])
+        screen.blit(kk_img, kk_img_rct)
         screen.blit(enn, bakudan_rct)
 
         pg.display.update()   
