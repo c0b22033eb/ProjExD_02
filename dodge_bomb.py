@@ -7,6 +7,27 @@ import pygame as pg
 WIDTH, HEIGHT = 1600, 900
 
 
+def hantei(rct):
+    left, top, right, bottom = rct
+    if left < 0:
+        bleft = False
+    else:
+        bleft = True
+    if 1600-right < left:
+        bright = False
+    else:
+        bright = True
+    if top < 0:
+        btop = False
+    else:
+        btop = True
+    if 900-bottom < top:
+        bbottom = False
+    else:
+        bbottom = True
+    return (bleft, bright, btop, bbottom)
+
+
 def main():
     pg.display.set_caption("逃げろ！こうかとん")
     screen = pg.display.set_mode((WIDTH, HEIGHT))
@@ -38,6 +59,26 @@ def main():
         if key_lst[pg.K_LEFT]: 合計移動量[0] -= 5
         if key_lst[pg.K_RIGHT]: 合計移動量[0] += 5
         kk_img_rct.move_ip(合計移動量)
+        kk_img_rct_bool = hantei(kk_img_rct)
+        print(kk_img_rct)
+        if not kk_img_rct_bool[0]:
+            kk_img_rct[0] = 0
+        if not kk_img_rct_bool[1]:
+            kk_img_rct[0] = 1600-kk_img_rct[3]
+        if not kk_img_rct_bool[2]:
+            kk_img_rct[1] = 0
+        if not kk_img_rct_bool[3]:
+            kk_img_rct[1] = 900-kk_img_rct[3]
+        bakudan_rct_bool = hantei(bakudan_rct)
+        if not bakudan_rct_bool[0]:
+            vx = -vx
+        if not bakudan_rct_bool[1]:
+            vx = -vx
+        if not bakudan_rct_bool[2]:
+            vy = -vy
+        if not bakudan_rct_bool[3]:
+            vy = -vy
+        bakudan_rct.move_ip((vx, vy))
         screen.blit(bg_img, [0, 0])
         screen.blit(kk_img, kk_img_rct)
         screen.blit(enn, bakudan_rct)
